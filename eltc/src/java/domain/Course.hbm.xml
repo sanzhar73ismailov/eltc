@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.Course" table="course" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="vendor" class="domain.Vendor" fetch="select" lazy="false">
+            <column name="vendor_id" not-null="true">
+                <comment>&#226;&#237;&#229;&#248;&#237;&#232;&#233; &#234;&#235;&#254;&#247; &#234; &#241;&#239;&#240;&#224;&#226;&#238;&#247;&#237;&#232;&#234;&#243;
+                &#226;&#229;&#237;&#228;&#238;&#240;&#238;&#226;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="category" class="domain.Category" fetch="select" lazy="false">
+            <column name="category_id" not-null="true">
+                <comment>&#226;&#237;&#229;&#248;&#237;&#232;&#233; &#234;&#235;&#254;&#247; &#234; &#241;&#239;&#240;&#224;&#226;&#238;&#247;&#237;&#232;&#234;&#243;
+                &#234;&#224;&#242;&#229;&#227;&#238;&#240;&#232;&#233; &#234;&#243;&#240;&#241;&#238;&#226;
+                (&#192;&#228;&#236;&#232;&#237;&#232;&#241;&#242;&#240;&#232;&#240;&#238;&#226;&#224;&#237;&#232;&#229; &#209;&#238;&#235;&#255;&#240;&#232;&#241; 10,
+                &#192;&#228;&#232;&#236;&#232;&#237;&#232;&#241;&#242;&#240;&#232;&#240;&#238;&#226;&#224;&#237;&#232;&#229; &#209;&#238;&#235;&#255;&#240;&#232;&#241;
+                11</comment>
+            </column>
+        </many-to-one>
+        <property name="codeOwn" type="string">
+            <column name="code_own" length="20" not-null="true" unique="true">
+                <comment>&#226;&#237;&#243;&#242;&#240;&#229;&#237;&#237;&#232;&#233; &#234;&#238;&#228;, &#232;&#241;&#239;&#238;&#235;&#252;&#231;&#243;&#229;&#236;&#251;&#233;
+                &#241;&#238;&#242;&#240;&#243;&#228;&#237;&#232;&#234;&#224;&#236;&#232; (&#237;&#224;&#239;&#240;. "sa100")</comment>
+            </column>
+        </property>
+        <property name="nameOriginal" type="string">
+            <column name="name_original" not-null="true" unique="true">
+                <comment>&#237;&#224;&#232;&#236;&#229;&#237;&#238;&#226;&#224;&#237;&#232;&#229; &#238;&#244;&#232;&#246;&#232;&#224;&#235;&#252;&#237;&#238;&#229; &#237;&#224;
+                &#224;&#237;&#227;&#235;&#232;&#233;&#241;&#234;&#238;&#236;, &#226; &#238;&#241;&#237;&#238;&#226;&#237;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="nameRu" type="string">
+            <column name="name_ru" not-null="true" unique="true">
+                <comment>&#237;&#224;&#232;&#236;&#229;&#237;&#238;&#226;&#224;&#237;&#232;&#229; &#237;&#224; &#240;&#243;&#241;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="discriptionEn" type="string">
+            <column name="discription_en" length="65535" not-null="true">
+                <comment>&#238;&#239;&#232;&#241;&#224;&#237;&#232;&#229; &#234;&#243;&#240;&#241;&#224; &#237;&#224;
+                &#224;&#237;&#227;&#235;&#232;&#233;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="discriptionRu" type="string">
+            <column name="discription_ru" length="65535" not-null="true">
+                <comment>&#238;&#239;&#232;&#241;&#224;&#237;&#232;&#229; &#234;&#243;&#240;&#241;&#224; &#237;&#224; &#240;&#243;&#241;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="durationDays" type="integer">
+            <column name="duration_days" not-null="true">
+                <comment>&#228;&#235;&#232;&#242;&#229;&#235;&#252;&#237;&#238;&#241;&#242;&#252; &#226; &#228;&#237;&#255;&#245;</comment>
+            </column>
+        </property>
+        <property name="durationHours" type="integer">
+            <column name="duration_hours" not-null="true">
+                <comment>&#228;&#235;&#232;&#242;&#229;&#235;&#252;&#237;&#238;&#241;&#242;&#252; &#226;
+                &#224;&#234;&#224;&#228;&#229;&#236;&#232;&#247;&#229;&#241;&#234;&#232;&#245; &#247;&#224;&#241;&#224;&#245;</comment>
+            </column>
+        </property>
+        <property name="additionalInfo" type="string">
+            <column name="additional_info" length="100">
+                <comment>&#239;&#240;&#232;&#236;&#229;&#247;&#224;&#237;&#232;&#229;</comment>
+            </column>
+        </property>
+        <property name="deleted" type="boolean">
+            <column name="deleted" not-null="true" default="0">
+                <comment>deleted</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <set name="courseOfficials" inverse="true">
+            <key>
+                <column name="course_id" not-null="true">
+                    <comment>id &#234;&#243;&#240;&#241;&#224; &#232;&#231; &#242;&#224;&#225;&#235;&#232;&#246;&#224; course</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.CourseOfficial" />
+        </set>
+        <set name="trainerPassedCourses" inverse="true">
+            <key>
+                <column name="course_id" not-null="true">
+                    <comment>id &#234;&#243;&#240;&#241;&#224;</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.TrainerPassedCourse" />
+        </set>
+        <set name="timetables" inverse="true">
+            <key>
+                <column name="course_id" not-null="true">
+                    <comment>&#234;&#243;&#240;&#241;</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.Timetable" />
+        </set>
+        <set name="courseSpecializations" inverse="true">
+            <key>
+                <column name="course_id" not-null="true">
+                    <comment>&#226;&#237;&#229;&#248;&#237;&#232;&#233; &#234;&#235;&#254;&#247; &#234; &#241;&#239;&#240;&#224;&#226;&#238;&#247;&#237;&#232;&#234;&#243;
+                    &#234;&#243;&#240;&#241;&#238;&#226;)</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.CourseSpecialization" />
+        </set>
+    </class>
+</hibernate-mapping>

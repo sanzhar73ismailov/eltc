@@ -1,0 +1,53 @@
+<%@ page pageEncoding="UTF-8" %>
+<c:if test="${pageNumberPanel.prevoiusNumber > 0}">
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.prevoiusNumber}, ${pageNumberPanel.findUrlString}});" title="Назад">
+        <span style="padding:0px 15px;"><<</span></a>
+</c:if>
+|
+<c:if test="${pageNumberPanel.firstNumber != pageNumberPanel.currentNumber}">
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.firstNumber}, ${pageNumberPanel.findUrlString}});">${pageNumberPanel.firstNumber}</a>
+    |
+</c:if>
+
+<c:if test="${(pageNumberPanel.prevoiusNumber-pageNumberPanel.firstNumber) > 1}">
+    ...
+    |
+</c:if>
+
+<c:if test="${(pageNumberPanel.prevoiusNumber-1) > 1}">
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.prevoiusNumber-1}, ${pageNumberPanel.findUrlString}});">${pageNumberPanel.prevoiusNumber-1}</a>
+    |
+</c:if>
+
+<c:if test="${pageNumberPanel.prevoiusNumber > 1}">
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.prevoiusNumber}, ${pageNumberPanel.findUrlString}});">${pageNumberPanel.prevoiusNumber}</a>
+    |
+</c:if>
+
+Страница ${pageNumberPanel.currentNumber} из ${pageNumberPanel.lastNumber}
+
+<c:if test="${pageNumberPanel.nextNumber < pageNumberPanel.lastNumber}">
+    |
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.nextNumber}, ${pageNumberPanel.findUrlString}});">${pageNumberPanel.nextNumber}</a>
+    |
+</c:if>
+
+<c:if test="${(pageNumberPanel.nextNumber+1) < pageNumberPanel.lastNumber}">
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.nextNumber+1}, ${pageNumberPanel.findUrlString}});">${pageNumberPanel.nextNumber+1}</a>
+    |
+</c:if>
+
+<c:if test="${(pageNumberPanel.lastNumber-pageNumberPanel.nextNumber) > 1}">
+    ...
+    |
+</c:if>
+
+<c:if test="${pageNumberPanel.lastNumber != pageNumberPanel.currentNumber}">
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.lastNumber}, ${pageNumberPanel.findUrlString}});">${pageNumberPanel.lastNumber}</a>
+    |
+</c:if>
+
+<c:if test="${pageNumberPanel.nextNumber < (pageNumberPanel.lastNumber+1)}">
+    <a href="javascript: sendFindForm({entity:'${entity}', page: ${pageNumberPanel.nextNumber}, ${pageNumberPanel.findUrlString} });" title="Вперед">
+        <span style="padding:0px 15px;">>></span></a>
+</c:if>

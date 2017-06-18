@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/eltc?characterEncoding=UTF-8</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">elsieltc</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <mapping resource="domain/Timetable.hbm.xml"/>
+    <mapping resource="domain/Country1.hbm.xml"/>
+    <mapping resource="domain/Manager.hbm.xml"/>
+    <mapping resource="domain/Certificate.hbm.xml"/>
+    <mapping resource="domain/Vendor.hbm.xml"/>
+    <mapping resource="domain/TrainerSpecialization.hbm.xml"/>
+    <mapping resource="domain/City.hbm.xml"/>
+    <mapping resource="domain/CourseOfficialPrice.hbm.xml"/>
+    <mapping resource="domain/VendorAgreement.hbm.xml"/>
+    <mapping resource="domain/Auditory.hbm.xml"/>
+    <mapping resource="domain/HrManager.hbm.xml"/>
+    <mapping resource="domain/TrainerPassedCourse.hbm.xml"/>
+    <mapping resource="domain/TypeOwnership.hbm.xml"/>
+    <mapping resource="domain/CourseOfficial.hbm.xml"/>
+    <mapping resource="domain/Category.hbm.xml"/>
+    <mapping resource="domain/Country.hbm.xml"/>
+    <mapping resource="domain/Contract.hbm.xml"/>
+    <mapping resource="domain/Student.hbm.xml"/>
+    <mapping resource="domain/Organization.hbm.xml"/>
+    <mapping resource="domain/Currency.hbm.xml"/>
+    <mapping resource="domain/Specialization.hbm.xml"/>
+    <mapping resource="domain/Industry.hbm.xml"/>
+    <mapping resource="domain/City1.hbm.xml"/>
+    <mapping resource="domain/TrainerCertificate.hbm.xml"/>
+    <mapping resource="domain/CourseSpecialization.hbm.xml"/>
+    <mapping resource="domain/OrganizationHrManager.hbm.xml"/>
+    <mapping resource="domain/Sex.hbm.xml"/>
+    <mapping resource="domain/TimetableStudent.hbm.xml"/>
+    <mapping resource="domain/Trainer.hbm.xml"/>
+    <mapping resource="domain/CourseType.hbm.xml"/>
+    <mapping resource="domain/Course.hbm.xml"/>
+    <mapping resource="domain/User.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

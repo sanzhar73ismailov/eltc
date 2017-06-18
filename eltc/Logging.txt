@@ -1,0 +1,2 @@
+фев 29, 2016 6:45:38 AM eltc.test.MyThreadClass run
+INFO: Thread with id: 11 runned

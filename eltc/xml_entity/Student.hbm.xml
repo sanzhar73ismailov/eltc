@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.Student" table="student" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sex" class="domain.Sex" fetch="select">
+            <column name="sex_id" not-null="true">
+                <comment>&#239;&#238;&#235; (1-&#236;&#243;&#230;, 2-&#230;&#229;&#237;)</comment>
+            </column>
+        </many-to-one>
+        <property name="lastNameRu" type="string">
+            <column name="last_name_ru" length="40" not-null="true">
+                <comment>&#244;&#224;&#236;&#232;&#235;&#232;&#255; &#237;&#224; &#240;&#243;&#241;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="firstNameRu" type="string">
+            <column name="first_name_ru" length="40" not-null="true">
+                <comment>&#232;&#236;&#255; &#237;&#224; &#240;&#243;&#241;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="patronicNameRu" type="string">
+            <column name="patronic_name_ru" length="40" not-null="true">
+                <comment>&#238;&#242;&#247;&#229;&#241;&#242;&#226;&#238; &#237;&#224; &#240;&#243;&#241;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="lastNameEn" type="string">
+            <column name="last_name_en" length="40" not-null="true">
+                <comment>&#244;&#224;&#236;&#232;&#235;&#232;&#255; &#237;&#224; &#224;&#237;&#227;&#235;&#232;&#233;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="firstNameEn" type="string">
+            <column name="first_name_en" length="40" not-null="true">
+                <comment>&#232;&#236;&#255; &#237;&#224; &#224;&#237;&#227;&#235;&#232;&#233;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="patronicNameEn" type="string">
+            <column name="patronic_name_en" length="40">
+                <comment>&#238;&#242;&#247;&#229;&#241;&#242;&#226;&#238; &#237;&#224; &#224;&#237;&#227;&#235;&#232;&#233;&#241;&#234;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="dateOfBirth" type="date">
+            <column name="date_of_birth" length="10">
+                <comment>&#228;&#224;&#242;&#224; &#240;&#238;&#230;&#228;&#229;&#237;&#232;&#255;</comment>
+            </column>
+        </property>
+        <property name="emailOffice" type="string">
+            <column name="email_office" length="40" not-null="true" unique="true">
+                <comment>&#253;&#235; &#239;&#238;&#247;&#242;&#224; - &#238;&#244;&#232;&#241;</comment>
+            </column>
+        </property>
+        <property name="emailHome" type="string">
+            <column name="email_home" length="40" unique="true">
+                <comment>&#253;&#235; &#239;&#238;&#247;&#242;&#224; - &#228;&#238;&#236;</comment>
+            </column>
+        </property>
+        <property name="emailAdd" type="string">
+            <column name="email_add" length="40">
+                <comment>&#253;&#235; &#239;&#238;&#247;&#242;&#224; &#228;&#238;&#239;&#238;&#235;&#237;&#232;&#242;&#229;&#235;&#252;&#237;&#224;&#255;</comment>
+            </column>
+        </property>
+        <property name="phoneHome" type="string">
+            <column name="phone_home" length="40">
+                <comment>&#228;&#238;&#236; &#242;&#229;&#235;&#229;&#244;&#238;&#237;</comment>
+            </column>
+        </property>
+        <property name="phoneMobile1" type="string">
+            <column name="phone_mobile1" length="40">
+                <comment>&#236;&#238;&#225;&#232;&#235; &#242;&#229;&#235;&#229;&#244;&#238;&#237;</comment>
+            </column>
+        </property>
+        <property name="phoneMobile2" type="string">
+            <column name="phone_mobile2" length="40">
+                <comment>&#236;&#238;&#225;&#232;&#235; &#242;&#229;&#235;&#229;&#244;&#238;&#237; &#228;&#238;&#239;&#238;&#235;</comment>
+            </column>
+        </property>
+        <property name="phoneOffice" type="string">
+            <column name="phone_office" length="40">
+                <comment>&#240;&#224;&#225;&#238;&#247;&#232;&#233; &#242;&#229;&#235;&#229;&#244;&#238;&#237;</comment>
+            </column>
+        </property>
+        <property name="skype" type="string">
+            <column name="skype" length="40" unique="true">
+                <comment>&#241;&#234;&#224;&#233;&#239;</comment>
+            </column>
+        </property>
+        <property name="icq" type="string">
+            <column name="icq" length="40" unique="true">
+                <comment>icq</comment>
+            </column>
+        </property>
+        <property name="mailruAgent" type="string">
+            <column name="mailru_agent" length="40" unique="true">
+                <comment>&#236;&#253;&#233;&#235; &#240;&#243; &#224;&#227;&#229;&#237;&#242;</comment>
+            </column>
+        </property>
+        <property name="comments" type="string">
+            <column name="comments" length="100">
+                <comment>&#239;&#240;&#232;&#236;&#229;&#247;&#224;&#237;&#232;&#229; &#239;&#238; &#241;&#242;&#243;&#228;&#229;&#237;&#242;&#243;</comment>
+            </column>
+        </property>
+        <property name="photo" type="string">
+            <column name="photo" length="40">
+                <comment>&#244;&#238;&#242;&#238; &#234;&#224;&#234; jpeg</comment>
+            </column>
+        </property>
+        <property name="personVueIdent" type="string">
+            <column name="person_vue_ident" length="40">
+                <comment>&#232;&#228;&#229;&#237;&#242;&#232;&#244;&#232;&#234;&#224;&#242;&#238;&#240; &#226; person vue</comment>
+            </column>
+        </property>
+        <property name="prometricIdent" type="string">
+            <column name="prometric_ident" length="40">
+                <comment>&#232;&#228;&#229;&#237;&#242;&#232;&#244;&#232;&#234;&#224;&#242;&#238;&#240; &#226; prometric</comment>
+            </column>
+        </property>
+        <property name="oracleLogin" type="string">
+            <column name="oracle_login" length="40">
+                <comment>&#235;&#238;&#227;&#232;&#237; &#238;&#240;&#224;&#234;&#235;&#224;</comment>
+            </column>
+        </property>
+        <property name="microsoftLogin" type="string">
+            <column name="microsoft_login" length="40">
+                <comment>&#235;&#238;&#227;&#232;&#237; &#236;&#224;&#233;&#234;&#240;&#238;&#241;&#238;&#244;&#242;&#224;</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <set name="timetableStudents" inverse="true">
+            <key>
+                <column name="student_id" not-null="true">
+                    <comment>&#241;&#242;&#243;&#228;&#229;&#237;&#242;</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.TimetableStudent" />
+        </set>
+    </class>
+</hibernate-mapping>

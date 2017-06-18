@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.TypeOwnership" table="type_ownership" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="20" not-null="true" unique="true">
+                <comment>&#237;&#224;&#232;&#236;&#229;&#237;&#238;&#226;&#224;&#237;&#232;&#229; &#234;&#238;&#240;&#238;&#242;&#234;&#238;&#229; (&#192;&#206;,&#210;&#206;&#206;
+                &#232; &#242;.&#228;.)</comment>
+            </column>
+        </property>
+        <property name="nameFull" type="string">
+            <column name="name_full" length="100" not-null="true" unique="true">
+                <comment>&#237;&#224;&#232;&#236;&#229;&#237;&#238;&#226;&#224;&#237;&#232;&#229; &#239;&#238;&#235;&#237;&#238;&#229;
+                (&#242;&#238;&#226;&#224;&#240;&#232;&#249;&#229;&#241;&#242;&#226;&#238; &#241; &#238;&#227;&#240;&#224;&#237;&#232;&#247;&#229;&#237;&#237;&#238;&#233;
+                &#238;&#242;&#226;&#229;&#242;&#241;&#226;&#229;&#237;&#237;&#238;&#241;&#242;&#252;&#254; &#232; &#242;.&#228;.)</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <set name="organizations" inverse="true">
+            <key>
+                <column name="type_ownership_id" not-null="true">
+                    <comment>&#244;&#238;&#240;&#236;&#224; &#241;&#238;&#225;&#241;&#242;&#226;&#229;&#237;&#237;&#238;&#241;&#242;&#232;</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.Organization" />
+        </set>
+    </class>
+</hibernate-mapping>

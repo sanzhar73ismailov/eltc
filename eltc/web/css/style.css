@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #ccccff;
+    padding: 2% 0 0;
+}
+h1{
+    /*    font-style: italic ;
+        color: blue;
+        font-size: 12px;
+        font-weight: bold;
+        font-variant: normal;*/
+}
+#header{
+    background-color: antiquewhite;
+    height: 140px;
+    /*    border-color: coral;
+        border-width: thick;*/
+}
+#lefter{
+    float: left;
+    width: 20%;
+    height: 600px;
+    /*    height: 450px;*/
+    background-color: azure;
+    padding-bottom:400px; 
+    clear: left;
+}
+
+#container{
+    float: right;
+    width: 80%;
+    height: 600px;
+    background-color: activeborder;
+    clear: right;
+    padding-bottom:400px; 
+}
+#footer{
+    background-color: antiquewhite;
+    width: 100%;
+    border-color: black;
+}
+#userName{
+    float: right;
+
+}
+.inpReq{
+    background-color: antiquewhite;
+}
+label.error{
+    color: red;
+}
+
+.errorMessage{
+    color: red;
+}
+.buttonEditForm{
+    width:150px;
+    height:30px;
+}
+.box_left_menu{
+
+    border: 4px dotted chocolate; 
+    padding: 5px;
+
+}
+.studentsOf{
+    background-color: #99CCFF;
+}
+
+.organizationsOf{
+    background-color: #ffb;
+}
+.coursesOf{
+    background-color: #e0f2be;
+}
+
+.emailsOf{
+    background-color: #ffcaca;
+}
+
+#nav { margin:0px; padding:0px; position:absolute; top: 70px; display:block;}
+#nav > li { list-style-type:none; float:left; display:block; margin:0px 10px; 
+            position:relative; padding:10px; width:120px;}
+#nav > li:hover ul { display:block; z-index: 1000; }
+#nav > li:hover { background-color:#808080; -moz-border-radius:10px; -webkit-border-radius:10px; }
+
+#nav li ul { margin:0px; padding:0px; display:none;}
+#nav li ul li { list-style-type:none; margin:10px 0 0 0;}
+#nav li ul li a { display:block; padding:5px 10px; color:#A2E200; text-decoration:none;}
+#nav li ul li:hover a { background-color:#606060; -moz-border-radius:5px; -webkit-border-radius:5px;}
+#nav li span { cursor:pointer; margin:0px 10px; font-weight:bold; }
+.contentfont {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000000;
+    text-decoration: none;
+   
+}
+.c1 {
+    background-color: #F0F0F0;
+}
+.c2 {
+    background-color: #F8F8F8;
+}

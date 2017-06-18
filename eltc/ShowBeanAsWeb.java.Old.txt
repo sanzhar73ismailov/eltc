@@ -1,0 +1,437 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eltc.web;
+
+import domain.*;
+import domainComparators.EmailComparator;
+import domainComparators.StudentOrganizationComparator;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import eltc.util.DbConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ *
+ * @author sanzhar.ismailov
+ */
+public class ShowBeanAsWeb {
+
+    public static String getSetWebString(Object obj) {
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        ResourceBundle rb = ResourceBundle.getBundle("resources.messages");
+
+        if (obj instanceof Student) {
+            Student student = (Student) obj;
+            map.put(rb.getString("id"), getAsString(student.getId()));
+            map.put(rb.getString("sex"), getAsString(student.getSex()));
+            map.put(rb.getString("lastNameRu"), getAsString(student.getLastNameRu()));
+            map.put(rb.getString("firstNameRu"), getAsString(student.getFirstNameRu()));
+            map.put(rb.getString("patronicNameRu"), getAsString(student.getPatronicNameRu()));
+            map.put(rb.getString("lastNameEn"), getAsString(student.getLastNameEn()));
+            map.put(rb.getString("firstNameEn"), getAsString(student.getFirstNameEn()));
+            map.put(rb.getString("patronicNameEn"), getAsString(student.getPatronicNameEn()));
+            map.put(rb.getString("dateOfBirth"), getAsString(student.getDateOfBirth()));
+            map.put(rb.getString("phoneHome"), getAsString(student.getPhoneHome()));
+            map.put(rb.getString("phoneMobile1"), getAsString(student.getPhoneMobile1()));
+            map.put(rb.getString("phoneMobile2"), getAsString(student.getPhoneMobile2()));
+            map.put(rb.getString("phoneOffice"), getAsString(student.getPhoneOffice()));
+            map.put(rb.getString("skype"), getAsString(student.getSkype()));
+            map.put(rb.getString("icq"), getAsString(student.getIcq()));
+            map.put(rb.getString("mailruAgent"), getAsString(student.getMailruAgent()));
+            map.put(rb.getString("comments"), getAsString(student.getComments()));
+            map.put(rb.getString("photo"), getAsString(student.getPhoto()));
+            map.put(rb.getString("personVueIdent"), getAsString(student.getPersonVueIdent()));
+            map.put(rb.getString("prometricIdent"), getAsString(student.getPrometricIdent()));
+            map.put(rb.getString("oracleLogin"), getAsString(student.getOracleLogin()));
+            map.put(rb.getString("microsoftLogin"), getAsString(student.getMicrosoftLogin()));
+            map.put(rb.getString("insertDatetime"), getAsString(student.getInsertDatetime()));
+            map.put(rb.getString("user"), getAsString(student.getUser()));
+
+            List<Email> emailList = getSortedListFromSet(student.getEmails(), new EmailComparator());
+            for (int i = 0; i < emailList.size(); i++) {
+                map.put(rb.getString("email") + " " + (i + 1), getAsString(emailList.get(i)));
+            }
+
+            List<StudentOrganization> studentOrgList =
+                    getSortedListFromSet(student.getStudentOrganizations(), new StudentOrganizationComparator());
+            for (int i = 0; i < studentOrgList.size(); i++) {
+                StudentOrganization element = studentOrgList.get(i);
+                map.put(rb.getString("organization") + " " + (i + 1),
+                        getAsString(element.getOrganization())
+                        + String.format("(%s \"%s\", %s)",
+                        rb.getString("department"), getAsString(element.getDepartment()), getAsString(element.getDate())));
+            }
+
+//            i = 0;
+//            for (Iterator<StudentOrganization> it = studentOrgs.iterator(); it.hasNext(); i++) {
+//                StudentOrganization element = it.next();
+//                map.put(rb.getString("organization") + " " + (++i),
+//                        getAsString(element.getOrganization())
+//                        + String.format("(%s \"%s\", %s)",
+//                        rb.getString("department"), getAsString(element.getDepartment()), getAsString(element.getDate())));
+//            }
+
+
+        } else if (obj instanceof Manager) {
+            Manager manager = (Manager) obj;
+            map.put(rb.getString("id"), getAsString(manager.getId()));
+            map.put(rb.getString("lastNameRu"), getAsString(manager.getLastNameRu()));
+            map.put(rb.getString("firstNameRu"), getAsString(manager.getFirstNameRu()));
+            map.put(rb.getString("patronicNameRu"), getAsString(manager.getPatronicNameRu()));
+            map.put(rb.getString("lastNameEn"), getAsString(manager.getLastNameEn()));
+            map.put(rb.getString("firstNameEn"), getAsString(manager.getFirstNameEn()));
+            map.put(rb.getString("patronicNameEn"), getAsString(manager.getPatronicNameEn()));
+            map.put(rb.getString("emailOffice"), getAsString(manager.getEmailOffice()));
+            map.put(rb.getString("emailHome"), getAsString(manager.getEmailHome()));
+            map.put(rb.getString("emailAdd"), getAsString(manager.getEmailAdd()));
+            map.put(rb.getString("phoneHome"), getAsString(manager.getPhoneHome()));
+            map.put(rb.getString("phoneMobile1"), getAsString(manager.getPhoneMobile1()));
+            map.put(rb.getString("phoneMobile2"), getAsString(manager.getPhoneMobile2()));
+            map.put(rb.getString("phoneOffice"), getAsString(manager.getPhoneOffice()));
+            map.put(rb.getString("skype"), getAsString(manager.getSkype()));
+            map.put(rb.getString("icq"), getAsString(manager.getIcq()));
+            map.put(rb.getString("mailruAgent"), getAsString(manager.getMailruAgent()));
+            map.put(rb.getString("cvDocFile"), getAsString(manager.getCvDocFile()));
+            map.put(rb.getString("photoFile"), getAsString(manager.getPhotoFile()));
+            map.put(rb.getString("isActual"), getAsString(manager.isIsActual()));
+        } else if (obj instanceof Trainer) {
+            Trainer student = (Trainer) obj;
+            map.put(rb.getString("id"), getAsString(student.getId()));
+            map.put(rb.getString("sex"), getAsString(student.getSex()));
+            map.put(rb.getString("lastNameRu"), getAsString(student.getLastNameRu()));
+            map.put(rb.getString("firstNameRu"), getAsString(student.getFirstNameRu()));
+            map.put(rb.getString("patronicNameRu"), getAsString(student.getPatronicNameRu()));
+            map.put(rb.getString("lastNameEn"), getAsString(student.getLastNameEn()));
+            map.put(rb.getString("firstNameEn"), getAsString(student.getFirstNameEn()));
+            map.put(rb.getString("patronicNameEn"), getAsString(student.getPatronicNameEn()));
+            map.put(rb.getString("dateOfBirth"), getAsString(student.getDateOfBirth()));
+            map.put(rb.getString("emailOffice"), getAsString(student.getEmailOffice()));
+            map.put(rb.getString("emailHome"), getAsString(student.getEmailHome()));
+            map.put(rb.getString("emailAdd"), getAsString(student.getEmailAdd()));
+            map.put(rb.getString("phoneHome"), getAsString(student.getPhoneHome()));
+            map.put(rb.getString("phoneMobile1"), getAsString(student.getPhoneMobile1()));
+            map.put(rb.getString("phoneMobile2"), getAsString(student.getPhoneMobile2()));
+            map.put(rb.getString("phoneOffice"), getAsString(student.getPhoneOffice()));
+            map.put(rb.getString("skype"), getAsString(student.getSkype()));
+            map.put(rb.getString("icq"), getAsString(student.getIcq()));
+            map.put(rb.getString("mailruAgent"), getAsString(student.getMailruAgent()));
+            map.put(rb.getString("cvDocFile"), getAsString(student.getCvDocFile()));
+            map.put(rb.getString("photoFile"), getAsString(student.getPhotoFile()));
+            map.put(rb.getString("insertDatetime"), getAsString(student.getInsertDatetime()));
+            map.put(rb.getString("user"), getAsString(student.getUser()));
+        } else if (obj instanceof City) {
+            City bean = (City) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("name"), getAsString(bean.getName()));
+            map.put(rb.getString("country"), getAsString(bean.getCountry()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+        } else if (obj instanceof Contract) {
+            Contract bean = (Contract) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("organization"), getAsString(bean.getOrganization()));
+            map.put(rb.getString("number"), getAsString(bean.getNumber()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("description"), getAsString(bean.getDescription()));
+            map.put(rb.getString("pdfFile"), getAsString(bean.getPdfFile()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof Course) {
+            Course bean = (Course) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("vendor"), getAsString(bean.getVendor()));
+            map.put(rb.getString("codeOwn"), getAsString(bean.getCodeOwn()));
+            map.put(rb.getString("nameOriginal"), getAsString(bean.getNameOriginal()));
+            map.put(rb.getString("nameRu"), getAsString(bean.getNameRu()));
+            map.put(rb.getString("discriptionEn"), getAsString(bean.getDiscriptionEn()));
+            map.put(rb.getString("discriptionRu"), getAsString(bean.getDiscriptionRu()));
+            map.put(rb.getString("category"), getAsString(bean.getCategory()));
+            map.put(rb.getString("durationDays"), getAsString(bean.getDurationDays()));
+            map.put(rb.getString("durationHours"), getAsString(bean.getDurationHours()));
+            map.put(rb.getString("additionalInfo"), getAsString(bean.getAdditionalInfo()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof CourseOfficial) {
+            CourseOfficial bean = (CourseOfficial) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("course"), getAsString(bean.getCourse()));
+            map.put(rb.getString("courseType"), getAsString(bean.getCourseType()));
+            map.put(rb.getString("code"), getAsString(bean.getCode()));
+            map.put(rb.getString("additionalInfo"), getAsString(bean.getAdditionalInfo()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof CourseOfficialPrice) {
+            CourseOfficialPrice bean = (CourseOfficialPrice) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("currency"), getAsString(bean.getCurrency()));
+            map.put(rb.getString("courseOfficial"), getAsString(bean.getCourseOfficial()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("price"), getAsString(bean.getPrice()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof CourseSpecialization) {
+            CourseSpecialization bean = (CourseSpecialization) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("course"), getAsString(bean.getCourse()));
+            map.put(rb.getString("specialization"), getAsString(bean.getSpecialization()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof HrManager) {
+            HrManager bean = (HrManager) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("sex"), getAsString(bean.getSex()));
+            map.put(rb.getString("lastNameRu"), getAsString(bean.getLastNameRu()));
+            map.put(rb.getString("firstNameRu"), getAsString(bean.getFirstNameRu()));
+            map.put(rb.getString("patronicNameRu"), getAsString(bean.getPatronicNameRu()));
+            map.put(rb.getString("lastNameEn"), getAsString(bean.getLastNameEn()));
+            map.put(rb.getString("firstNameEn"), getAsString(bean.getFirstNameEn()));
+            map.put(rb.getString("patronicNameEn"), getAsString(bean.getPatronicNameEn()));
+            map.put(rb.getString("emailOffice"), getAsString(bean.getEmailOffice()));
+            map.put(rb.getString("emailHome"), getAsString(bean.getEmailHome()));
+            map.put(rb.getString("emailAdd"), getAsString(bean.getEmailAdd()));
+            map.put(rb.getString("phoneHome"), getAsString(bean.getPhoneHome()));
+            map.put(rb.getString("phoneMobile1"), getAsString(bean.getPhoneMobile1()));
+            map.put(rb.getString("phoneMobile2"), getAsString(bean.getPhoneMobile2()));
+            map.put(rb.getString("phoneOffice"), getAsString(bean.getPhoneOffice()));
+            map.put(rb.getString("skype"), getAsString(bean.getSkype()));
+            map.put(rb.getString("icq"), getAsString(bean.getIcq()));
+            map.put(rb.getString("mailruAgent"), getAsString(bean.getMailruAgent()));
+            map.put(rb.getString("cvDocFile"), getAsString(bean.getCvDocFile()));
+            map.put(rb.getString("photoFile"), getAsString(bean.getPhotoFile()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof Organization) {
+            Organization bean = (Organization) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("industry"), getAsString(bean.getIndustry()));
+            map.put(rb.getString("region"), getAsString(bean.getRegion()));
+            map.put(rb.getString("locality"), getAsString(bean.getLocality()));
+            map.put(rb.getString("typeOwnership"), getAsString(bean.getTypeOwnership()));
+            map.put(rb.getString("streetHouseFact"), getAsString(bean.getStreetHouseFact()));
+            map.put(rb.getString("streetHouseOfficial"), getAsString(bean.getStreetHouseOfficial()));
+            map.put(rb.getString("vendor"), getAsString(bean.getVendor()));
+            map.put(rb.getString("cityByCityOfficialId"), getAsString(bean.getCityByCityOfficialId().getName()));
+            map.put(rb.getString("cityByCityFactId"), getAsString(bean.getCityByCityFactId().getName()));
+            map.put(rb.getString("name"), getAsString(bean.getName()));
+            map.put(rb.getString("nameEn"), getAsString(bean.getNameEn()));
+            map.put(rb.getString("postalCodeOfficial"), getAsString(bean.getPostalCodeOfficial()));
+            map.put(rb.getString("postalCodeFact"), getAsString(bean.getPostalCodeFact()));
+            map.put(rb.getString("fax"), getAsString(bean.getFax()));
+            map.put(rb.getString("internetSite"), getAsString(bean.getInternetSite()));
+            map.put(rb.getString("email"), getAsString(bean.getEmail()));
+            map.put(rb.getString("rnn"), getAsString(bean.getRnn()));
+            map.put(rb.getString("bin"), getAsString(bean.getBin()));
+            map.put(rb.getString("kbe"), getAsString(bean.getKbe()));
+            map.put(rb.getString("bankName"), getAsString(bean.getBankName()));
+            map.put(rb.getString("bankAddress"), getAsString(bean.getBankAddress()));
+            map.put(rb.getString("bic"), getAsString(bean.getBic()));
+            map.put(rb.getString("accountTg"), getAsString(bean.getAccountTg()));
+            map.put(rb.getString("accountDollar"), getAsString(bean.getAccountDollar()));
+            map.put(rb.getString("accountRuble"), getAsString(bean.getAccountRuble()));
+            map.put(rb.getString("accountEuro"), getAsString(bean.getAccountEuro()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof OrganizationHrManager) {
+            OrganizationHrManager bean = (OrganizationHrManager) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("organization"), getAsString(bean.getOrganization()));
+            map.put(rb.getString("hrManager"), getAsString(bean.getHrManager()));
+            map.put(rb.getString("isActual"), getAsString(bean.getIsActual()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof Certificate) {
+            Certificate bean = (Certificate) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("vendor"), getAsString(bean.getVendor()));
+            map.put(rb.getString("code"), getAsString(bean.getCode()));
+            map.put(rb.getString("name"), getAsString(bean.getName()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof Timetable) {
+            Timetable bean = (Timetable) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("course"), getAsString(bean.getCourse()));
+            map.put(rb.getString("trainerByTrainerOfficialId"), getAsString(bean.getTrainerByTrainerOfficialId()));
+            map.put(rb.getString("trainerByTrainerFactId"), getAsString(bean.getTrainerByTrainerFactId()));
+            map.put(rb.getString("auditory"), getAsString(bean.getAuditory()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof TimetableStudent) {
+            TimetableStudent bean = (TimetableStudent) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("manager"), getAsString(bean.getManager()));
+            map.put(rb.getString("courseOfficial"), getAsString(bean.getCourseOfficial()));
+            map.put(rb.getString("student"), getAsString(bean.getStudent()));
+            map.put(rb.getString("timetable"), getAsString(bean.getTimetable()));
+            map.put(rb.getString("contract"), getAsString(bean.getContract()));
+            map.put(rb.getString("priceFact"), getAsString(bean.getPriceFact()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof TrainerCertificate) {
+            TrainerCertificate bean = (TrainerCertificate) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("certificate"), getAsString(bean.getCertificate()));
+            map.put(rb.getString("trainer"), getAsString(bean.getTrainer()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof TrainerPassedCourse) {
+            TrainerPassedCourse bean = (TrainerPassedCourse) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("course"), getAsString(bean.getCourse()));
+            map.put(rb.getString("trainer"), getAsString(bean.getTrainer()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof TrainerSpecialization) {
+            TrainerSpecialization bean = (TrainerSpecialization) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("specialization"), getAsString(bean.getSpecialization()));
+            map.put(rb.getString("trainer"), getAsString(bean.getTrainer()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof TypeOwnership) {
+            TypeOwnership bean = (TypeOwnership) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("name"), getAsString(bean.getName()));
+            map.put(rb.getString("nameFull"), getAsString(bean.getNameFull()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof VendorAgreement) {
+            VendorAgreement bean = (VendorAgreement) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("vendor"), getAsString(bean.getVendor()));
+            map.put(rb.getString("number"), getAsString(bean.getNumber()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("description"), getAsString(bean.getDescription()));
+            map.put(rb.getString("pdfFile"), getAsString(bean.getPdfFile()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof Email) {
+            Email bean = (Email) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("email"), getAsString(bean.getEmail()));
+            map.put(rb.getString("student"), String.format("<a href='edit?entity=student&id=%s'>%s</a>", bean.getStudent().getId(), getAsString(bean.getStudent())));
+            map.put(rb.getString("emailType"), getAsString(bean.getEmailType()));
+            map.put(rb.getString("isActual"), getAsString(bean.isIsActual()));
+            map.put(rb.getString("subscribe"), getAsString(bean.isSubscribe()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof StudentOrganization) {
+            StudentOrganization bean = (StudentOrganization) obj;
+            map.put(rb.getString("id"), getAsString(bean.getId()));
+            map.put(rb.getString("student"), String.format("<a href='edit?entity=student&id=%s'>%s</a>", bean.getStudent().getId(), getAsString(bean.getStudent())));
+            map.put(rb.getString("organization"), String.format("<a href='edit?entity=organization&id=%s'>%s</a>", bean.getOrganization().getId(), getAsString(bean.getOrganization())));
+            map.put(rb.getString("department"), getAsString(bean.getDepartment()));
+            map.put(rb.getString("status"), getAsString(bean.getStatus()));
+            map.put(rb.getString("date"), getAsString(bean.getDate()));
+            map.put(rb.getString("user"), getAsString(bean.getUser()));
+            map.put(rb.getString("insertDatetime"), getAsString(bean.getInsertDatetime()));
+        } else if (obj instanceof DictionaryInterface) {
+            DictionaryInterface student = (DictionaryInterface) obj;
+            map.put(rb.getString("id"), getAsString(student.getId()));
+            map.put(rb.getString("name"), getAsString(student.getName()));
+            map.put(rb.getString("insertDatetime"), getAsString(student.getInsertDatetime()));
+            map.put(rb.getString("user"), getAsString(student.getUser()));
+        } else {
+            throw new RuntimeException("Unknow instance in ShowBeanAsWeb.getSetWebString() method");
+        }
+
+        return fromMapToWebString(map);
+    }
+
+    private static <T> List<T> getSortedListFromSet(Set<T> unsortedSet, Comparator comparator) {
+        List<T> list = new ArrayList(unsortedSet);
+        Collections.sort(list, comparator);
+        return list;
+    }
+
+    private static String fromMapToWebString(Map<String, Object> map) {
+        Set<Entry<String, Object>> setEntries = map.entrySet();
+        StringBuilder strBuilder = new StringBuilder();
+        String trTdPattern = "<tr><td>%s: </td><td>%s</td></tr>";
+        strBuilder.append("<table border='1'>");
+
+        for (Entry<String, Object> entry : setEntries) {
+            strBuilder.append(String.format(trTdPattern, entry.getKey(), entry.getValue()));
+        }
+        strBuilder.append("</table>");
+
+        return strBuilder.toString();
+    }
+
+    public static String getAsString(Object obj) {
+        String asString = null;
+        if (obj == null) {
+            return "";
+        }
+        if (obj instanceof String) {
+            return (String) obj;
+        }
+        if (obj instanceof Sex) {
+            Sex sex = (Sex) obj;
+            asString = sex.getName();
+        } else if (obj instanceof Date) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            asString = sdf.format((Date) obj);
+        } else if (obj instanceof DictionaryInterface) {
+            asString = ((DictionaryInterface) obj).getName();
+        } else if (obj instanceof TypeOwnership) {
+            asString = ((TypeOwnership) obj).getNameFull();
+        } else if (obj instanceof Organization) {
+            asString = ((Organization) obj).getName();
+        } else if (obj instanceof Certificate) {
+            Certificate bean = (Certificate) obj;
+            asString = bean.getCode() + " " + bean.getName();
+        } else if (obj instanceof Course) {
+            Course bean = (Course) obj;
+            asString = bean.getCodeOwn() + " " + bean.getNameRu();
+        } else if (obj instanceof CourseOfficial) {
+            CourseOfficial bean = (CourseOfficial) obj;
+            asString = bean.getCode() + " "
+                    + bean.getCourse().getNameRu() + " "
+                    + bean.getCourseType().getName();
+        } else if (obj instanceof Timetable) {
+            Timetable bean = (Timetable) obj;
+            asString = bean.getDate() + " " + bean.getCourse().getNameRu();
+        } else if (obj instanceof Contract) {
+            Contract bean = (Contract) obj;
+            asString = bean.getNumber() + " (внутр. ном.: " + bean.getNumberInternal() + ") " + getAsString(bean.getDate()) + " " + bean.getOrganization().getName();
+        } else if (obj instanceof PersonInterface) {
+            PersonInterface bean = (PersonInterface) obj;
+            asString = bean.getLastNameRu() + " " + bean.getFirstNameRu() + " " + bean.getPatronicNameRu() + ", " + getAsString(bean.getDateOfBirth());
+        } else if (obj instanceof Boolean) {
+            asString = ((Boolean) obj).booleanValue() == true ? "Да" : "Нет";
+        } else if (obj instanceof Email) {
+            Email bean = (Email) obj;
+            asString = bean.getEmail()
+                    + ", тип: " + bean.getEmailType().getName()
+                    + ", актуально: " + (bean.isIsActual() ? "Да" : "Нет")
+                    + ", подписано на рассылку: " + (bean.isSubscribe() ? "Да" : "Нет");
+        } else {
+            return obj.toString();
+        }
+        return asString;
+    }
+}

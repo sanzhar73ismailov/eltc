@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.VendorAgreement" table="vendor_agreement" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="vendor" class="domain.Vendor" fetch="select" lazy="false">
+            <column name="vendor_id" not-null="true">
+                <comment>&#226;&#229;&#237;&#228;&#238;&#240;</comment>
+            </column>
+        </many-to-one>
+        <property name="number" type="string">
+            <column name="number" length="40" not-null="true">
+                <comment>&#237;&#238;&#236;&#229;&#240; &#241;&#238;&#227;&#235;&#224;&#248;&#229;&#237;&#232;&#255;</comment>
+            </column>
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" not-null="true">
+                <comment>&#228;&#224;&#242;&#224; &#226;&#251;&#228;&#224;&#247;&#232;</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="40">
+                <comment>&#234;&#240;&#224;&#242;&#234;&#238;&#229; &#238;&#239;&#232;&#241;&#224;&#237;&#232;&#229;</comment>
+            </column>
+        </property>
+        <property name="pdfFile" type="string">
+            <column name="pdf_file" length="40">
+                <comment>&#244;&#224;&#233;&#235; &#241;&#238;&#227;&#235;&#224;&#248;&#229;&#237;&#232;&#255;</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

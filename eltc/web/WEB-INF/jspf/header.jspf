@@ -1,0 +1,139 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sort" uri="/WEB-INF/tlds/sort_library.tld" %>
+<%@ taglib prefix="myTag" tagdir="/WEB-INF/tags/" %>
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="shortcut icon" href="<c:url value='favicon.ico'/>" type="image/x-icon"> 
+        <title>${pageTitle}</title>
+        <script src="<c:url value='jscript/myScript.js'/>"></script>
+        <script src="<c:url value='jscript/ajaxScript.js'/>"></script>
+       
+        <%--
+        <!-- Load jQuery and the validate plugin -->
+        <script src="<c:url value="jscript/jquery-1.10.0.min.js" />"></script>
+        <script src="<c:url value="jscript/jquery.validate.min.js" />"></script>
+        
+        
+        --%>
+
+    </head>
+    <body>
+        <div id="header">
+
+            <div id="userName">
+                <table style="padding: 10px">
+                    <tr>
+                        <c:choose>
+                            <c:when test="${userSession != null}">
+                                <td style="padding-right: 30px; background-color: #B3D38D">${sessionScope.userSession.name}</td>
+                                <td><a href="logout"><button>Выход</button></a></td>
+                            </c:when>
+                            <c:otherwise>
+                                    <td style="padding-right: 30px;"><a href="login"><button><fmt:message key="toLogin"/></button></a><p/></td>
+                                    <td><a href="registration"><button><fmt:message key="registration"/></button></a></td>
+                                </c:otherwise>
+
+                        </c:choose>
+                    </tr>
+                    <tr style="background-color: #99CCFF">
+                        <td style="padding-right: 30px;"><fmt:message key="numberOfUsers"/><p/></td>
+                        <td><%= eltc.web.SessionUserListener.getActiveUsers()%> </td>
+                    </tr>
+                    <tr>
+                        program version 1.16.2.1
+                    </tr>
+                </table>
+            </div>
+
+
+            <c:if test="${userSession != null}">
+                <ul id="nav">
+                    <li><span><a href="index"><fmt:message key='main_page'/></a><br/></span>
+                    </li>
+                    <li><span><fmt:message key='students'/></span>
+                        <ul>
+                            <li><a href="show?entity=student"><fmt:message key='list_student'/></a></li>
+                        </ul>
+                    </li>            
+                    <li><span><fmt:message key='organizations'/></span>
+                        <ul>
+                            <li> <a href="show?entity=organization"><fmt:message key='list_organization'/></a><p/></li>
+                            <li><a href="show?entity=hr_manager"><fmt:message key='list_hr_manager'/></li>
+                            <li><a href="show?entity=organization_hr_manager"><fmt:message key='list_organization_hr_manager'/></a></li>
+                            <li> <a href="show?entity=contract"><fmt:message key='list_contract'/></a></li>
+                            <li> <a href="show?entity=type_ownership"><fmt:message key='list_type_ownership'/></a></li>
+                            <li><a href="show?entity=industry"><fmt:message key='list_industry'/></a></li>
+                        </ul>
+                    </li>
+                    <li><span><fmt:message key='vendors'/></span>
+                        <ul>
+                            <li> <a href="show?entity=vendor"><fmt:message key='list_vendor'/></a></li>
+                            <li><a href="show?entity=vendor_agreement"><fmt:message key='list_vendor_agreement'/></a></li>
+                        </ul>
+                    </li>
+                    <li><span><fmt:message key='courses'/></span>
+                        <ul>
+                            <li><a href="show?entity=course"><fmt:message key='list_course'/></a></li>
+                            <li><a href="show?entity=course_official"><fmt:message key='list_course_official'/></a></li>
+                            <li><a href="show?entity=course_official_price"><fmt:message key='list_course_official_price'/></li>
+                            <li><a href="show?entity=course_specialization"><fmt:message key='list_course_specialization'/></a></li>
+                            <li><a href="show?entity=course_type"><fmt:message key='list_course_type'/></a></li>
+                        </ul>
+                    </li>
+                    <li><span><fmt:message key='staff'/></span>
+                        <ul>
+                            <li><a href="show?entity=manager"><fmt:message key='list_manager'/></li>
+                            <li><a href="show?entity=trainer"><fmt:message key='list_trainer'/></a></li>
+                            <li><a href="show?entity=trainer_passed_course"><fmt:message key='list_trainer_passed_course'/></a></li>
+                            <li><a href="show?entity=trainer_certificate"><fmt:message key='list_trainer_certificate'/></a></li>
+                            <li><a href="show?entity=trainer_specialization"><fmt:message key='list_trainer_specialization'/></a></li>
+                            <li><a href="show?entity=certificate"><fmt:message key='list_certificate'/></a></li>
+                        </ul>
+                    </li>
+                    <li><span><fmt:message key='timetable'/></span>
+                        <ul>
+                            <li><a href="show?entity=timetable"><fmt:message key='list_timetable'/></a></li>
+                            <li><a href="show?entity=timetable_student"><fmt:message key='list_timetable_student'/></a></li>
+                        </ul>
+                    </li>
+                    <li><span><fmt:message key='dictionaries'/></span>
+                        <ul>
+                            <li><a href="show?entity=vendor"><fmt:message key='list_vendor'/></a></li>
+                            <li><a href="show?entity=auditory"><fmt:message key='list_auditory'/></a></li>
+                            <li><a href="show?entity=category"><fmt:message key='list_category'/></a></li>
+                            <li><a href="show?entity=country"><fmt:message key='list_country'/></a></li>
+                            <li><a href="show?entity=course_type"><fmt:message key='list_course_type'/></a></li>
+                            <li><a href="show?entity=currency"><fmt:message key='list_currency'/></a></li>
+                            <li><a href="show?entity=industry"><fmt:message key='list_industry'/></a></li>
+                            <li><a href="show?entity=specialization"><fmt:message key='list_specialization'/></a></li>
+                            <li><a href="show?entity=city"><fmt:message key='list_city'/></a></li>
+                            <li><a href="show?entity=region"><fmt:message key='list_region'/></a></li>
+                        </ul>
+                    </li>
+                </ul> 
+            </c:if>
+
+            <%--
+            <form name="menuForm1" action="index">
+                <input  type="submit" value="На главную"/>
+            </form>
+            <form name="menuForm2" action="showBeans">
+                <input type="hidden" name="entity" value="students"
+                <input  type="submit" value="Список Студентов"/>
+            </form>
+            
+            <form name="menuForm3" action="showBeans">
+                <input type="hidden" name="entity" value="managers"
+                <input  type="submit" value="Список Студентов"/>
+            </form>
+            --%>
+        </div>
+
+

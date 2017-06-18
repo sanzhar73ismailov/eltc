@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.Category" table="category" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="200" not-null="true" unique="true">
+                <comment>&#237;&#224;&#232;&#236;&#229;&#237;&#238;&#226;&#224;&#237;&#232;&#229;</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <set name="courses" inverse="true">
+            <key>
+                <column name="category_id" not-null="true">
+                    <comment>&#226;&#237;&#229;&#248;&#237;&#232;&#233; &#234;&#235;&#254;&#247; &#234; &#241;&#239;&#240;&#224;&#226;&#238;&#247;&#237;&#232;&#234;&#243;
+                    &#234;&#224;&#242;&#229;&#227;&#238;&#240;&#232;&#233; &#234;&#243;&#240;&#241;&#238;&#226;
+                    (&#192;&#228;&#236;&#232;&#237;&#232;&#241;&#242;&#240;&#232;&#240;&#238;&#226;&#224;&#237;&#232;&#229; &#209;&#238;&#235;&#255;&#240;&#232;&#241; 10,
+                    &#192;&#228;&#232;&#236;&#232;&#237;&#232;&#241;&#242;&#240;&#232;&#240;&#238;&#226;&#224;&#237;&#232;&#229; &#209;&#238;&#235;&#255;&#240;&#232;&#241;
+                    11</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.Course" />
+        </set>
+    </class>
+</hibernate-mapping>

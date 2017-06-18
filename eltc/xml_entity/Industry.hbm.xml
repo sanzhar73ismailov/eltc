@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.Industry" table="industry" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="40" not-null="true">
+                <comment>&#237;&#224;&#232;&#236;&#229;&#237;&#238;&#226;&#224;&#237;&#232;&#229;</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <set name="organizations" inverse="true">
+            <key>
+                <column name="industry_id" not-null="true">
+                    <comment>&#226;&#232;&#228; &#228;&#229;&#242;&#229;&#235;&#252;&#237;&#238;&#241;&#242;&#232; (&#244;&#232;&#237;&#224;&#237;&#241;&#238;&#226;&#251;&#233;
+                    &#232;&#237;&#241;&#242;&#232;&#242;&#243;&#242;, &#227;&#238;&#241; &#226;&#238;&#229;&#237;&#237;&#224;&#255;
+                    &#241;&#242;&#240;&#243;&#234;&#242;&#243;&#240;&#224;, &#234;&#238;&#236;&#239;&#224;&#237;&#232;&#255; &#241;&#238;&#242;&#238;&#226;&#238;&#233;
+                    &#241;&#226;&#255;&#231;&#232;, &#232; &#242;.&#228;. &#237;&#224;&#228;&#238; &#239;&#238;&#228;&#243;&#236;&#224;&#242;&#252;)</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.Organization" />
+        </set>
+    </class>
+</hibernate-mapping>

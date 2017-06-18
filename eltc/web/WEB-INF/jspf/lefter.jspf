@@ -1,0 +1,81 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<div id="lefter">
+
+    <c:if test="${userSession != null}">
+       
+        <%--_Name: ${param.par1}<br/>
+        Name: ${param.par2}<br/>
+        --%>
+
+        <div class="box_left_menu">
+            <h3><fmt:message key="students"/></h3>
+            <a href="create?entity=student">Создать студента</a><p/>
+            <a href="emailListCreate">Выгрузить эл почту всю</a><p/>
+            <a href="emailListCreate?filter=actualAndSubscribe">Выгрузить эл почту актуал и подписанные на рассылку</a><p/>
+            
+
+        </div>
+
+
+        <div class="box_left_menu">
+            <h3><fmt:message key="organizations"/>  </h3>
+            <a href="create?entity=organization">Создать организацию</a><p/>
+            <a href="create?entity=hr_manager">Создать HR-менеджера</a><p/>
+            <a href="create?entity=organization_hr_manager">Создать связку "HR-менеджер-организация"</a><p/>
+            <a href="create?entity=contract">Создать контракт</a><p/>
+        </div>
+
+        <div class="box_left_menu">
+            <h3><fmt:message key="vendors"/>  </h3>
+            <a href="create?entity=vendor">Создать вендора</a><p/>
+            <a href="create?entity=vendor_agreement">Создать соглашение с вендором</a><p/>
+        </div>
+
+        <div class="box_left_menu">
+            <h3><fmt:message key="courses"/>  </h3>
+            <a href="create?entity=course">Создать курс</a><p/>
+            <a href="create?entity=course_official">Создать официальный курс</a><p/>
+            <a href="create?entity=course_official_price">Создать цену официального курса</a><p/>
+            <a href="create?entity=course_specialization">Создать специализацию курса</a><p/>
+            <a href="create?entity=course_type">Создать тип курса</a><p/>
+        </div>
+
+        <div class="box_left_menu">
+            <h3> <fmt:message key="staff"/>  </h3>
+            <a href="create?entity=manager">Создать менеджера</a><p/>
+            <a href="create?entity=trainer">Создать тренера</a><p/>
+            <a href="create?entity=trainer_certificate">Создать сертификат тренеру</a><p/>
+            <a href="create?entity=trainer_passed_course">Создать пройденный курс тренером</a><p/>
+            <a href="create?entity=trainer_specialization">Создать полученную тренером специализацию</a><p/>
+        </div>
+
+
+        <div class="box_left_menu">
+            <h3> <fmt:message key="timetable"/>  </h3>
+            <a href="create?entity=timetable">Создать расписание</a><p/>
+            <a href="create?entity=timetable_student">Создать привязку расписание-студент</a><p/>
+        </div>
+
+        <div class="box_left_menu">
+            <h3> <fmt:message key="dictionaries"/>  </h3>
+            <a href="create?entity=country">Создать страну</a><p/>
+            <a href="create?entity=region">Создать область</a><p/>
+            <a href="create?entity=city">Создать город</a><p/>
+            <a href="create?entity=auditory">Создать аудиторию</a><p/>
+            <a href="create?entity=category">Создать категорию</a><p/>
+            <a href="create?entity=currency">Создать валюту</a><p/>
+            <a href="create?entity=industry">Создать вид индустрии</a><p/>
+            <a href="create?entity=specialization">Создать специализацию</a><p/>
+            <a href="create?entity=certificate">Создать сертификат</a><p/>
+            <a href="create?entity=type_ownership">Создать форму собственности</a><p/>
+        </div>
+
+
+
+
+    </c:if>
+
+
+</div>

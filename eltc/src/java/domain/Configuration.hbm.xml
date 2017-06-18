@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.Configuration" table="configuration" catalog="eltc">
+        <id name="id" type="string">
+            <column name="id" length="30"/>
+        </id>
+        <property name="value" type="string">
+            <column name="value" length="30" not-null="true">
+                <comment>&#237;&#224;&#232;&#236;&#229;&#237;&#238;&#226;&#224;&#237;&#232;&#229;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

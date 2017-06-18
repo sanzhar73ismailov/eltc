@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="eltc" name="domain.Vendor" table="vendor">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="name" type="string">
+      <column length="40" name="name" not-null="true" unique="true">
+        <comment>íàèìåíîâàíèå âåíäîðà</comment>
+      </column>
+    </property>
+    <property name="user" type="string">
+      <column length="20" name="user">
+        <comment>ïîëüçîâàòåëü</comment>
+      </column>
+    </property>
+    <property name="insertDatetime" type="timestamp">
+      <column length="19" name="insert_datetime" not-null="true">
+        <comment>âðåìÿ äîáàâëåíèÿ çàïèñè</comment>
+      </column>
+    </property>
+    <set inverse="true" name="certificates">
+      <key>
+        <column name="vendor_id" not-null="true">
+          <comment>âåíäîð</comment>
+        </column>
+      </key>
+      <one-to-many class="domain.Certificate"/>
+    </set>
+    <set inverse="true" name="vendorAgreements">
+      <key>
+        <column name="vendor_id" not-null="true">
+          <comment>âåíäîð</comment>
+        </column>
+      </key>
+      <one-to-many class="domain.VendorAgreement"/>
+    </set>
+    <set inverse="true" name="organizations">
+      <key>
+        <column name="vendor_id">
+          <comment>âåíäîð</comment>
+        </column>
+      </key>
+      <one-to-many class="domain.Organization"/>
+    </set>
+    <set inverse="true" name="courses">
+      <key>
+        <column name="vendor_id" not-null="true">
+          <comment>âíåøíèé êëþ÷ ê ñïðàâî÷íèêó
+                    âåíäîðîâ</comment>
+        </column>
+      </key>
+      <one-to-many class="domain.Course"/>
+    </set>
+  </class>
+</hibernate-mapping>

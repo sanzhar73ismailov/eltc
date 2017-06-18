@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 25, 2013 9:36:05 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.Email" table="email" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="student" class="domain.Student" fetch="join">
+            <column name="student_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="emailType" class="domain.EmailType" fetch="join" lazy="false">
+            <column name="email_type_id" not-null="true"/>
+        </many-to-one>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" />
+        </property>
+        <property name="isActual" type="boolean">
+            <column name="is_actual" not-null="true" />
+        </property>
+        <property name="subscribe" type="boolean">
+            <column name="subscribe" not-null="true" />
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

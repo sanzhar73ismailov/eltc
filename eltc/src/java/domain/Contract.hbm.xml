@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.Contract" table="contract" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="organization" class="domain.Organization" fetch="join" lazy="false">
+            <column name="organization_id" not-null="true">
+                <comment>&#238;&#240;&#227;&#224;&#237;&#232;&#231;&#224;&#246;&#232;&#255;</comment>
+            </column>
+        </many-to-one>
+        <property name="number" type="string">
+            <column name="number" length="20" not-null="true">
+                <comment>&#237;&#238;&#236;&#229;&#240; &#228;&#238;&#227;&#238;&#226;&#238;&#240;&#224;</comment>
+            </column>
+        </property>
+         <property name="numberInternal" type="string">
+            <column name="number_internal" length="20" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" not-null="true">
+                <comment>&#228;&#224;&#242;&#224; &#228;&#238;&#227;&#238;&#226;&#238;&#240;&#224;</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description">
+                <comment>&#238;&#239;&#232;&#241;&#224;&#237;&#232;&#229;</comment>
+            </column>
+        </property>
+        <property name="pdfFile" type="string">
+            <column name="pdf_file" length="200">
+                <comment>&#238;&#242;&#241;&#234;&#224;&#237;&#232;&#240;. &#226;&#224;&#240;&#232;&#224;&#237;&#242;</comment>
+            </column>
+        </property>
+         <property name="wordFile" type="string">
+            <column name="word_file" length="200">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="deleted" type="boolean">
+            <column name="deleted" not-null="true" default="0">
+                <comment>deleted</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <set name="timetableStudents" inverse="true">
+            <key>
+                <column name="contract_id" not-null="true">
+                    <comment>&#228;&#238;&#227;&#238;&#226;&#238;&#240;, &#229;&#241;&#235;&#232; &#239;&#238; &#228;&#238;&#227;&#238;&#226;&#238;&#240;&#243;</comment>
+                </column>
+            </key>
+            <one-to-many class="domain.TimetableStudent" />
+        </set>
+    </class>
+</hibernate-mapping>

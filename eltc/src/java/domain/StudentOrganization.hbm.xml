@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 2, 2014 9:08:28 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.StudentOrganization" table="student_organization" catalog="eltc">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="student" class="domain.Student" fetch="select" lazy="false">
+            <column name="student_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="organization" class="domain.Organization" fetch="join">
+            <column name="organization_id" not-null="true" />
+        </many-to-one>
+        <property name="department" type="string">
+            <column name="department" length="200">
+                <comment>&#206;&#242;&#228;&#229;&#235;</comment>
+            </column>
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="40">
+                <comment>&#196;&#238;&#235;&#230;&#237;&#238;&#241;&#242;&#252;</comment>
+            </column>
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" not-null="true">
+                <comment>&#196;&#224;&#242;&#224; &#226;&#237;&#229;&#241;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20">
+                <comment>&#239;&#238;&#235;&#252;&#231;&#238;&#226;&#224;&#242;&#229;&#235;&#252;</comment>
+            </column>
+        </property>
+        <property name="insertDatetime" type="timestamp">
+            <column name="insert_datetime" length="19" not-null="true">
+                <comment>&#226;&#240;&#229;&#236;&#255; &#228;&#238;&#225;&#224;&#226;&#235;&#229;&#237;&#232;&#255; &#231;&#224;&#239;&#232;&#241;&#232;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

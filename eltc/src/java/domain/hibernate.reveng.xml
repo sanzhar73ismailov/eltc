@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+    <schema-selection match-catalog="eltc"/>
+    <table-filter match-name="vendor_agreement"/>
+    <table-filter match-name="course_type"/>
+    <table-filter match-name="trainer_certificate"/>
+    <table-filter match-name="timetable"/>
+    <table-filter match-name="trainer"/>
+    <table-filter match-name="currency"/>
+    <table-filter match-name="certificate"/>
+    <table-filter match-name="timetable_student"/>
+    <table-filter match-name="course_official_price"/>
+    <table-filter match-name="sex"/>
+    <table-filter match-name="manager"/>
+    <table-filter match-name="city"/>
+    <table-filter match-name="hr_manager"/>
+    <table-filter match-name="trainer_specialization"/>
+    <table-filter match-name="category"/>
+    <table-filter match-name="course_official"/>
+    <table-filter match-name="organization"/>
+    <table-filter match-name="auditory"/>
+    <table-filter match-name="student"/>
+    <table-filter match-name="vendor"/>
+    <table-filter match-name="course"/>
+    <table-filter match-name="country"/>
+    <table-filter match-name="industry"/>
+    <table-filter match-name="organization_hr_manager"/>
+    <table-filter match-name="type_ownership"/>
+    <table-filter match-name="trainer_passed_course"/>
+    <table-filter match-name="course_specialization"/>
+    <table-filter match-name="contract"/>
+    <table-filter match-name="specialization"/>
+    <table-filter match-name="user"/>
+    <table-filter match-name="region"/>
+    <table-filter match-name="email"/>
+    <table-filter match-name="email_type"/>
+    <table-filter match-name="student_organization"/>
+    <table-filter match-name="configuration"/>
+    <table-filter match-name="user_visit"/>
+</hibernate-reverse-engineering>

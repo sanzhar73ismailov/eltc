@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 10, 2013 10:55:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="eltc" name="domain.Certificate" table="certificate">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="domain.Vendor" fetch="select" name="vendor" lazy="false">
+      <column name="vendor_id" not-null="true">
+        <comment>âåíäîð</comment>
+      </column>
+    </many-to-one>
+    <property name="code" type="string">
+      <column length="40" name="code" not-null="true">
+        <comment>êîä ñåðòèôèêàòà</comment>
+      </column>
+    </property>
+    <property name="name" type="string">
+      <column name="name" not-null="true" unique="true">
+        <comment>íàèìåíîâàíèå ñåðòèôèêàòà</comment>
+      </column>
+    </property>
+    <property name="user" type="string">
+      <column length="20" name="user">
+        <comment>ïîëüçîâàòåëü</comment>
+      </column>
+    </property>
+    <property name="insertDatetime" type="timestamp">
+      <column length="19" name="insert_datetime" not-null="true">
+        <comment>âðåìÿ äîáàâëåíèÿ çàïèñè</comment>
+      </column>
+    </property>
+    <set inverse="true" name="trainerCertificates">
+      <key>
+        <column name="certificate_id" not-null="true">
+          <comment>id ñåðòèôèêàòà</comment>
+        </column>
+      </key>
+      <one-to-many class="domain.TrainerCertificate"/>
+    </set>
+  </class>
+</hibernate-mapping>
